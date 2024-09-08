@@ -122,7 +122,7 @@ def is_duplicate(db, title):
     return len(docs) > 0
 
 # 총 12페이지 데이터를 가져옴
-for page in range(12):
+for page in range(1):
     print(f"Processing page {page + 1}...")
     try:
         time.sleep(3)
