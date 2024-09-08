@@ -18,7 +18,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2  # Python 환경 설정
       with:
-        python-version: '3.12.6'  # Python 3.12.6 버전 사용
+        python-version: '3.11'  # Python 3.11 버전 사용
 
     - name: Install dependencies
       run: |
