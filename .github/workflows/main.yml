@@ -1,0 +1,37 @@
+name: Run Crawling Script
+
+on:
+  push:
+    branches:
+      - main  # main 브랜치로의 푸시가 발생할 때 실행
+  schedule:
+    - cron: '0 22 * * 1'  # 매주 월요일 오전 7시 (한국 시간 기준)
+
+jobs:
+  run-crawling-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # 리포지토리에서 소스 코드를 가져옴
+
+    - name: Set up Python
+      uses: actions/setup-python@v2  # Python 환경 설정
+      with:
+        python-version: '3.11'  # Python 3.11 버전 사용
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt  # requirements.txt에 명시된 패키지 설치
+
+    - name: Set up Chrome for Selenium
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable  # Selenium을 위한 Chrome 설치
+        google-chrome-stable --version  # 설치된 Chrome 버전 확인
+
+    - name: Run crawl.py
+      run: |
+        python crawl.py  # Python 스크립트 실행
+      env:
+        FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}  # Firebase 자격 증명 환경 변수
