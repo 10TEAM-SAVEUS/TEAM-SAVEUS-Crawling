@@ -30,8 +30,8 @@ jobs:
         sudo apt-get install -y google-chrome-stable  # Selenium을 위한 Chrome 설치
         google-chrome-stable --version  # 설치된 Chrome 버전 확인
 
-    - name: Run crawling.py
+    - name: Run crawl.py
       run: |
-        python crawling.py  # Python 스크립트 실행
+        python crawl.py  # Python 스크립트 실행
       env:
         FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}  # Firebase 자격 증명 환경 변수
