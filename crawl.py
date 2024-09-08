@@ -118,11 +118,11 @@ def extract_release_date(subtitle):
 
 def is_duplicate(db, title):
     #Firestore에 이미 존재하는 제목인지 확인(Reports컬렉션의 데이터와 중복여부검사)
-    docs = db.collection('Reports2').where('Title', '==', title).get()
+    docs = db.collection('Reports').where('Title', '==', title).get()
     return len(docs) > 0
 
 # 총 12페이지 데이터를 가져옴
-for page in range(1):
+for page in range(12):
     print(f"Processing page {page + 1}...")
     try:
         time.sleep(3)
@@ -177,7 +177,7 @@ for page in range(1):
                 }
 
                 if not is_duplicate(db, translated_main_title):
-                    db.collection('Reports3').add(report_data)
+                    db.collection('Reports').add(report_data)
                     print(f"{translated_main_title} 저장 완료.")
                 else:
                     print(f"{translated_main_title}은 이미 저장되어 있습니다.")
